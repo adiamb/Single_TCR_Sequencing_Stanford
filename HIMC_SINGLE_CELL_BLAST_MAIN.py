@@ -1,8 +1,10 @@
-import re, copy, gzip, os, sys, datetime,subprocess
+import re, copy, gzip, os, sys, datetime,subprocess, argparse
 from Bio.Blast.Applications import NcbiblastnCommandline
 from Bio.Seq import Seq
 from Bio.Blast import NCBIXML
-fasta = sys.argv[1]
+parser = argparse.ArgumentParser()
+parser.add_argument("-fasta", help="A fasta chunk file must be used an input")
+fasta = parser.fasta
 if '.gz' in fasta:
 	subprocess.Popen('gzcat '+fasta +'> '+fasta.replace('.gz',''), shell=True)
 	fasta = fasta.replace('.gz','')
